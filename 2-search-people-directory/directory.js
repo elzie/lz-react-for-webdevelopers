@@ -87,9 +87,25 @@
   function People(props) {
     return (
       <div className="results">
-        {props.people.map(function (person) {
-          return <Person key={person.id} person={person} />;
-        })}
+        <ReactTransitionGroup.TransitionGroup>
+          {props.people.map(function (person) {
+            return (
+              // <ReactTransitionGroup.CSSTransition key={person.id} classNames={{
+              //   enter: 'fade-enter',
+              //   enterActive: 'fade-enter-active',
+              //   exit: 'fade-exit',
+              //   exitActive: 'fade-exit-active'
+              // }}>
+              <ReactTransitionGroup.CSSTransition
+                key={person.id}
+                classNames="fade"
+                timeout={1000}
+              >
+                <Person person={person} />
+              </ReactTransitionGroup.CSSTransition>
+            );
+          })}
+        </ReactTransitionGroup.TransitionGroup>
       </div>
     );
   }
