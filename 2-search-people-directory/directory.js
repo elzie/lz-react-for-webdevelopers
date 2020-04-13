@@ -25,6 +25,18 @@
   function Filters(props) {
     var titles = window.LMDirectory.titles;
 
+    function updateName(evt) {
+      props.updateFormState("currentName", evt.target.value);
+    }
+
+    function updateTitle(evt) {
+      props.updateFormState("currentTitle", evt.target.value);
+    }
+
+    function updateIntern(evt) {
+      props.updateFormState("isIntern", evt.target.checked);
+    }
+
     return (
       <form action="" id="directory-filters">
         <div className="group">
@@ -34,11 +46,18 @@
             name="person_name"
             placeholder="Name of employee"
             id="person-name"
+            value={props.currentName}
+            onChange={updateName}
           />
         </div>
         <div className="group">
           <label htmlFor="person-title">Job Title:</label>
-          <select name="person_title" id="person-title">
+          <select
+            name="person_title"
+            id="person-title"
+            value={props.currentTitle}
+            onChange={updateTitle}
+          >
             <option value="">- Select -</option>
             {titles.map(function (title) {
               return (
@@ -51,7 +70,14 @@
         </div>
         <div className="group">
           <label>
-            <input type="checkbox" value="1" name="person_intern" /> Intern
+            <input
+              type="checkbox"
+              value="1"
+              name="person_intern"
+              checked={props.isIntern}
+              onChange={updateIntern}
+            />{" "}
+            Intern
           </label>
         </div>
       </form>
@@ -76,9 +102,19 @@
       // Set up Initial state
       this.state = {
         people: window.LMDirectory.people,
+        currentName: "",
+        currentTitle: "",
+        isIntern: false,
       };
-    }
 
+      // To 'bind this'. Makes sure updateFormState's 'THIS.setState' allways refers to our Directory component.
+      this.updateFormState = this.updateFormState.bind(this);
+    }
+    updateFormState(name, val) {
+      this.setState({
+        [name]: val,
+      });
+    }
     render() {
       return (
         <div className="company-directory">
@@ -88,7 +124,12 @@
             directory.
           </p>
 
-          <Filters />
+          <Filters
+            currentName={this.state.currentName}
+            currentTitle={this.state.currentTitle}
+            isIntern={this.state.isIntern}
+            updateFormState={this.updateFormState}
+          />
 
           <People people={this.state.people} />
         </div>
