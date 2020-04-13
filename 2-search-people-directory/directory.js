@@ -26,22 +26,24 @@
     var titles = window.LMDirectory.titles;
 
     function updateName(evt) {
-      props.updateFormState("currentName", evt.target.value);
+      props.updateFormState({ currentName: evt.target.value });
     }
 
     function updateTitle(evt) {
-      props.updateFormState("currentTitle", evt.target.value);
+      props.updateFormState({ currentTitle: evt.target.value });
     }
 
     function updateIntern(evt) {
-      props.updateFormState("isIntern", evt.target.checked);
+      props.updateFormState({ isIntern: evt.target.checked });
     }
 
     function resetForm(e) {
       e.preventDefault();
-      props.updateFormState("currentName", "");
-      props.updateFormState("currentTitle", "");
-      props.updateFormState("isIntern", false);
+      props.updateFormState({
+        currentName: "",
+        currentTitle: "",
+        isIntern: false,
+      });
     }
 
     return (
@@ -141,13 +143,8 @@
       this.updateFormState = this.updateFormState.bind(this);
     }
 
-    updateFormState(name, val) {
-      this.setState(
-        {
-          [name]: val,
-        },
-        this.updatePeopleList
-      );
+    updateFormState(spec) {
+      this.setState(spec, this.updatePeopleList);
       // Second paramater of setState can be a callBack function
     }
 
