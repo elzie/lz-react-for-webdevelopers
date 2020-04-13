@@ -1,17 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/1-product-customizer/node_modules
-/1-product-customizer/hplussport.com
-/2-search-people-directory/node_modules
-/2-search-people-directory/leafandmortar.com
-/2-search-people-directory/business.wpdiy.net
-/3-small-messaging-app
-/3-landonhotel/node_modules
-/3-landonhotel/firebase.js
+/node_modules
 /.pnp
 .pnp.js
-firebase.js
 
 # testing
 /coverage

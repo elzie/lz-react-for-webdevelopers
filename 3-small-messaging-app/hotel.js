@@ -3,7 +3,7 @@ class PostForm extends React.Component {
     super(props);
 
     // Type options are an object; convert to an array and map
-    this.typeOptions = Object.keys(props.messageTypes).map(function(key) {
+    this.typeOptions = Object.keys(props.messageTypes).map(function (key) {
       if (props.messageTypes.hasOwnProperty(key)) {
         return (
           <option key={key} value={key}>
@@ -87,7 +87,7 @@ class StatusMessageList extends React.Component {
 
   displayStatusMessages() {
     return this.state.statuses.map(
-      function(status) {
+      function (status) {
         return (
           <li key={status.id}>
             <StatusMessage
