@@ -37,6 +37,13 @@
       props.updateFormState("isIntern", evt.target.checked);
     }
 
+    function resetForm(e) {
+      e.preventDefault();
+      props.updateFormState("currentName", "");
+      props.updateFormState("currentTitle", "");
+      props.updateFormState("isIntern", false);
+    }
+
     return (
       <form action="" id="directory-filters">
         <div className="group">
@@ -80,6 +87,9 @@
             Intern
           </label>
         </div>
+        <div className="group">
+          <button onClick={resetForm}>Reset</button>
+        </div>
       </form>
     );
   }
@@ -90,15 +100,14 @@
         <ReactTransitionGroup.TransitionGroup>
           {props.people.map(function (person) {
             return (
-              // <ReactTransitionGroup.CSSTransition key={person.id} classNames={{
-              //   enter: 'fade-enter',
-              //   enterActive: 'fade-enter-active',
-              //   exit: 'fade-exit',
-              //   exitActive: 'fade-exit-active'
-              // }}>
               <ReactTransitionGroup.CSSTransition
                 key={person.id}
-                classNames="fade"
+                classNames={{
+                  enter: "animated",
+                  enterActive: "bounceInLeft",
+                  exit: "animated",
+                  exitActive: "fadeOutLeft",
+                }}
                 timeout={1000}
               >
                 <Person person={person} />
@@ -109,6 +118,11 @@
       </div>
     );
   }
+  //   <ReactTransitionGroup.CSSTransition
+  //   key={person.id}
+  //   classNames="fade"
+  //   timeout={1000}
+  // >
 
   // class component is ES6 syntax
   class Directory extends React.Component {
