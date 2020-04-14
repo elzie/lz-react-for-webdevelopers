@@ -75,6 +75,22 @@ const AllUpdates = styled.div`
   }
   & li {
     list-style-type: none;
+    margin: 20px 0 20px 0;
+  }
+`;
+const StatusMessage = styled.div``;
+
+const NameAndTime = styled.div`
+  font-size: 76%;
+  font-weight: 300;
+  color: #f0eba3;
+  margin-left: 0.75em;
+  & ::before {
+    content: '- ';
+  }
+  & span {
+    display: inline-block;
+    margin: 0 10px 0 10px;
   }
 `;
 class StatusUpdates extends React.Component {
@@ -96,7 +112,7 @@ class StatusUpdates extends React.Component {
     // Firestore
     let query = statusRef
       .orderBy('createdAt', 'desc')
-      .limit(3)
+      .limit(6)
       .get()
       .then((snapshot) => {
         if (snapshot.empty) {
@@ -187,15 +203,31 @@ class StatusUpdates extends React.Component {
                   {this.state.status.map((status) => {
                     return (
                       <li key={status.id}>
-                        {status.msg} <br />
-                        {status.type} <br />
-                        {
-                          status.createdAt.toDate().toLocaleDateString()
-                          /*
-                          Error: Objects are not valid as a React child (found: object with keys {seconds, nanoseconds}). 
-                          If you meant to render a collection of children, use an array instead.
-                          */
-                        }
+                        <StatusMessage>{status.msg}</StatusMessage>
+                        <NameAndTime>
+                          <span>
+                            {status.type.charAt(0).toUpperCase() +
+                              status.type.slice(1)}
+
+                            {
+                              //   status.createdAt.toDate().toLocaleDateString()
+                              /*
+                            Error: Objects are not valid as a React child (found: object with keys {seconds, nanoseconds}). 
+                            If you meant to render a collection of children, use an array instead.
+                            */
+                            }
+                          </span>
+                          <span>
+                            {new Intl.DateTimeFormat('en-GB', {
+                              year: 'numeric',
+                              month: '2-digit',
+                              day: '2-digit',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                              second: '2-digit',
+                            }).format(status.createdAt.toDate())}
+                          </span>
+                        </NameAndTime>
                       </li>
                     );
                   })}
