@@ -190,7 +190,7 @@ class StatusUpdates extends React.Component {
                         {status.msg} <br />
                         {status.type} <br />
                         {
-                          // status.createdAt
+                          status.createdAt.toDate().toLocaleDateString()
                           /*
                           Error: Objects are not valid as a React child (found: object with keys {seconds, nanoseconds}). 
                           If you meant to render a collection of children, use an array instead.
