@@ -44,9 +44,9 @@ const PostUpdate = styled.div`
     padding: 0;
   }
   @media (max-width: 360px) {
-    margin: 10px 0 5px 0;
+    margin: 1rem;
     padding: 5px;
-    width: 100%;
+    width: 75%;
   }
 `;
 const Group = styled.div`
@@ -92,9 +92,9 @@ const AllUpdates = styled.div`
     margin: 20px 0 20px 0;
   }
   @media (max-width: 360px) {
-    margin: 10px 0 10px 0;
+    margin: 1rem;
     padding: 5px;
-    width: 100%;
+    width: 75%;
     & li {
       margin: 5px 0 5px 0;
       padding: 5px;
