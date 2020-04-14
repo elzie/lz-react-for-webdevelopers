@@ -15,9 +15,9 @@ class App extends React.Component {
   //   super(props);
   // }
   componentDidMount() {
-    window.scrollTo(0, 1499);
+    // window.scrollTo(0, 1499);
     // Set back to 0,0 when done
-    // window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }
   hotelStatusDepth = null;
   hotelStatusRef = (ref) => {

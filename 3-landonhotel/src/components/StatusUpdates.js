@@ -9,6 +9,9 @@ const Wrapper = styled.div`
   background-image: url(${BackGround});
   background-position: 65% top;
   background-size: cover;
+  @media (max-width: 360px) {
+    height: 100vh;
+  }
 `;
 const Header = styled.div`
   background: rgba(0, 0, 0, 0.8);
@@ -40,6 +43,11 @@ const PostUpdate = styled.div`
     margin: 4px 0;
     padding: 0;
   }
+  @media (max-width: 360px) {
+    margin: 10px 0 5px 0;
+    padding: 5px;
+    width: 100%;
+  }
 `;
 const Group = styled.div`
   display: block;
@@ -62,6 +70,9 @@ const Button = styled.div`
     margin: 10px 12px 10px 10px;
     width: 16em;
   }
+  @media (max-width: 360px) {
+    margin: 10px 40px 10px 10px;
+  }
 `;
 const AllUpdates = styled.div`
   width: calc(100% - 30em);
@@ -71,15 +82,27 @@ const AllUpdates = styled.div`
   margin: 2rem;
   float: left;
   & ul {
+    margin: 0;
+    padding: 0;
     min-height: 150px;
   }
   & li {
+    padding: 10px;
     list-style-type: none;
     margin: 20px 0 20px 0;
   }
+  @media (max-width: 360px) {
+    margin: 10px 0 10px 0;
+    padding: 5px;
+    width: 100%;
+    & li {
+      margin: 5px 0 5px 0;
+      padding: 5px;
+      font-size: 12px;
+    }
+  }
 `;
 const StatusMessage = styled.div``;
-
 const NameAndTime = styled.div`
   font-size: 76%;
   font-weight: 300;
@@ -190,7 +213,7 @@ class StatusUpdates extends React.Component {
                     <textarea
                       id="txt-message"
                       rows="3"
-                      maxlength="256"
+                      maxLength="256"
                       ref={this.msgRef}
                       onChange={(e) => this.setState({ msg: e.target.value })}
                     ></textarea>

@@ -16,6 +16,9 @@ import AttractionsIcon from '../img/icons/attractions.png';
 const Wrapper = styled.div`
   height: 60vh;
   background-image: linear-gradient(to bottom, #efc94c, #e27a3f);
+  @media (max-width: 360px) {
+    height: 100vh;
+  }
 `;
 const Header = styled.div`
   //   background: rgba(0, 0, 0, 0.6);
@@ -27,6 +30,11 @@ const Header = styled.div`
   & div {
     display: inline-block;
     margin: 0 10px 0 0;
+  }
+  @media (max-width: 360px) {
+    & div {
+      margin: 0;
+    }
   }
 `;
 const CompanyName = styled.div`
@@ -45,6 +53,13 @@ const CompanyName = styled.div`
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+
+  @media (max-width: 360px) {
+    width: 100px !important;
+    margin: 0 !important;
+    padding: 0 5px 0 5px;
+    font-size: 12px;
+  }
 `;
 const MenuItem = styled.div`
   display: inline-block;
@@ -65,17 +80,23 @@ const MenuItem = styled.div`
     background-color: #efc94c;
     color: #063642;
   }
+  @media (max-width: 360px) {
+    & div {
+      padding: 13px 10px 10px 45px;
+      margin: 0 10px 0 10px !important;
+      font-size: 12px !important;
+    }
+  }
 `;
 const Content = styled.div`
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  width: 550px;
+  max-width: 550px;
   height: 55vh;
   margin: auto;
   text-align: center;
-  & div {
-  }
+
   & h3 {
     font-size: 26px;
     font-weight: normal;
@@ -96,6 +117,12 @@ const Content = styled.div`
     border-radius: 20%;
     margin: 0 10px 0 10px;
     display: inline-block;
+  }
+  @media (max-width: 360px) {
+    height: 80vh;
+    & div {
+      margin: 20px;
+    }
   }
 `;
 
