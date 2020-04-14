@@ -111,31 +111,47 @@ class StatusUpdates extends React.Component {
 
     // Firestore
     let query = statusRef
-      .orderBy('createdAt', 'desc')
+      .orderBy('createdAt', 'asc')
       .limit(6)
-      .get()
-      .then((snapshot) => {
-        if (snapshot.empty) {
-          console.log('No matching documents.');
-          return;
-        }
-
-        snapshot.forEach((doc) => {
-          //   console.log(doc.id, '=>', doc.data());
-          const status = {
-            id: doc.id,
-            type: doc.data().type,
-            msg: doc.data().msg,
-            createdAt: doc.data().createdAt,
-          };
-          this.setState({
-            status: [...this.state.status, status],
-          });
+      .onSnapshot((snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === 'added') {
+            const doc = change.doc;
+            const status = {
+              id: doc.id,
+              type: doc.data().type,
+              msg: doc.data().msg,
+              createdAt: doc.data().createdAt,
+            };
+            this.setState({
+              status: [status, ...this.state.status],
+            });
+          }
         });
-      })
-      .catch((err) => {
-        console.log('Error getting documents', err);
       });
+    //   .get()
+    //   .then((snapshot) => {
+    //     if (snapshot.empty) {
+    //       console.log('No matching documents.');
+    //       return;
+    //     }
+
+    //     snapshot.forEach((doc) => {
+    //       //   console.log(doc.id, '=>', doc.data());
+    //       const status = {
+    //         id: doc.id,
+    //         type: doc.data().type,
+    //         msg: doc.data().msg,
+    //         createdAt: doc.data().createdAt,
+    //       };
+    //       this.setState({
+    //         status: [...this.state.status, status],
+    //       });
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log('Error getting documents', err);
+    //   });
   }
 
   handleSubmit = (e) => {
@@ -174,6 +190,7 @@ class StatusUpdates extends React.Component {
                     <textarea
                       id="txt-message"
                       rows="3"
+                      maxlength="256"
                       ref={this.msgRef}
                       onChange={(e) => this.setState({ msg: e.target.value })}
                     ></textarea>
