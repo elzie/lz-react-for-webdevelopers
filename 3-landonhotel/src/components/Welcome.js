@@ -51,7 +51,6 @@ class Welcome extends React.Component {
   //     super(props);
   //   }
   linkClicked = () => {
-    console.log('click');
     this.props.scroll();
   };
 

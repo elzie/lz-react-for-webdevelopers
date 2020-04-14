@@ -17,10 +17,11 @@ class App extends React.Component {
   componentDidMount() {
     window.scrollTo(0, 1499);
     // Set back to 0,0 when done
+    // window.scrollTo(0, 0);
   }
   hotelStatusDepth = null;
   hotelStatusRef = (ref) => {
-    console.log('hotelStatusDepth', ref);
+    // console.log('hotelStatusDepth', ref);
     this.hotelStatusDepth = ref;
   };
   scrollToHotelStatus = () => {
@@ -29,7 +30,7 @@ class App extends React.Component {
 
   statusUpdatesDepth = null;
   statusUpdatesRef = (ref) => {
-    console.log('statusUpdatesDepth', ref);
+    // console.log('statusUpdatesDepth', ref);
     this.statusUpdatesDepth = ref;
   };
   scrollToStatusUpdates = () => {
@@ -38,7 +39,7 @@ class App extends React.Component {
 
   localAttractionsDepth = null;
   localAttractionsRef = (ref) => {
-    console.log('localAttractionsDepth', ref);
+    // console.log('localAttractionsDepth', ref);
     this.localAttractionsDepth = ref;
   };
   scrollToLocalAttractions = () => {

@@ -1,4 +1,5 @@
 import React from 'react';
+import { statusRef } from '../firebase';
 import styled from 'styled-components';
 
 import BackGround from '../img/hotel/events_conference.jpg';
@@ -80,10 +81,68 @@ class StatusUpdates extends React.Component {
   constructor(props) {
     super(props);
     this.UpdatesPagePageRef = React.createRef();
+
+    this.state = {
+      status: [],
+      id: null,
+      msg: '',
+      type: '',
+      createdAt: '',
+    };
   }
   componentDidMount() {
     this.props.refProp(this.UpdatesPagePageRef.current.offsetTop);
+
+    // Firestore
+    let query = statusRef
+      .orderBy('createdAt', 'desc')
+      .limit(3)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.empty) {
+          console.log('No matching documents.');
+          return;
+        }
+
+        snapshot.forEach((doc) => {
+          //   console.log(doc.id, '=>', doc.data());
+          const status = {
+            id: doc.id,
+            type: doc.data().type,
+            msg: doc.data().msg,
+            createdAt: doc.data().createdAt,
+          };
+          this.setState({
+            status: [...this.state.status, status],
+          });
+        });
+      })
+      .catch((err) => {
+        console.log('Error getting documents', err);
+      });
   }
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    try {
+      const newStatus = {
+        msg: this.state.msg,
+        type: this.state.type,
+        createdAt: new Date(),
+      };
+      //   console.log(newStatus);
+      statusRef.add(newStatus);
+
+      this.msgRef.current.value = '';
+      this.typeRef.current.value = '';
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  typeRef = React.createRef();
+  msgRef = React.createRef();
+
   render() {
     return (
       <div>
@@ -93,17 +152,27 @@ class StatusUpdates extends React.Component {
             <Content>
               <PostUpdate>
                 <h3>Post an Update</h3>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                   <Group>
                     <label htmlFor="txt-message">Message</label>
-                    <textarea id="txt-message" rows="3"></textarea>
+                    <textarea
+                      id="txt-message"
+                      rows="3"
+                      ref={this.msgRef}
+                      onChange={(e) => this.setState({ msg: e.target.value })}
+                    ></textarea>
                   </Group>
                   <Group>
                     <label htmlFor="txt-type">Type</label>
-                    <select id="txt-type">
+                    <select
+                      id="txt-type"
+                      ref={this.typeRef}
+                      onChange={(e) => this.setState({ type: e.target.value })}
+                    >
+                      <option value="">- Select -</option>
                       <option value="management">Management</option>
                       <option value="dining">Dining Services</option>
-                      <option value="ops">Operations</option>
+                      <option value="operations">Operations</option>
                       <option value="plumbing">Plumbing</option>
                       <option value="pool">Pool</option>
                     </select>
@@ -115,9 +184,21 @@ class StatusUpdates extends React.Component {
               </PostUpdate>
               <AllUpdates>
                 <ul>
-                  <li>status update</li>
-                  <li>status update</li>
-                  <li>status update</li>
+                  {this.state.status.map((status) => {
+                    return (
+                      <li key={status.id}>
+                        {status.msg} <br />
+                        {status.type} <br />
+                        {
+                          // status.createdAt
+                          /*
+                          Error: Objects are not valid as a React child (found: object with keys {seconds, nanoseconds}). 
+                          If you meant to render a collection of children, use an array instead.
+                          */
+                        }
+                      </li>
+                    );
+                  })}
                 </ul>
               </AllUpdates>
             </Content>

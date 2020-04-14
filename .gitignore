@@ -8,7 +8,7 @@
 /2-search-people-directory/business.wpdiy.net
 /3-small-messaging-app
 /3-landonhotel/node_modules
-/3-landonhotel/firebase.js
+/3-landonhotel/src/firebase.js
 /.pnp
 .pnp.js
 firebase.js
