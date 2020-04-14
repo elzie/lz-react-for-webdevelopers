@@ -8,7 +8,7 @@ import ArrowDown from '../img/misc/arrow.png';
 const Wrapper = styled.div`
   background-image: url(${backgroundImage});
   background-position: center center;
-  //   background-size: cover
+  background-size: cover;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -44,6 +44,7 @@ const Arrow = styled.div`
   width: 50px;
   height: 50px;
   margin: 20px auto;
+  cursor: pointer;
 `;
 class Welcome extends React.Component {
   //   constructor(props) {

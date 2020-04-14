@@ -10,16 +10,31 @@ import twitterImage from '../img/socialmedia/twitter.png';
 import youtubeImage from '../img/socialmedia/youtube.png';
 
 const Wrapper = styled.div`
-  height: 50vh;
+  height: 60vh;
   background-image: url(${BackGround});
   background-position: center center;
   background-size: cover;
 `;
-
-const Header = styled.div`
-  background: rgba(0, 0, 0, 0.6);
-  height: 5vh;
-  color: white;
+const Content = styled.div`
+  display: flex;
+  align-items: center;
+  height: 60vh;
+  & div {
+    margin: auto;
+    background: rgba(256, 256, 256, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 50%;
+    font-weight: 200;
+  }
+  & h1 {
+    font: 200 1.5em/1.5em 'Exo 2', 'Helvetica Neue', Helvetica, Arial,
+      sans-serif;
+    color: #0e83a0;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+  }
 `;
 const SocialCenter = styled.div`
   margin: auto;
@@ -30,7 +45,7 @@ const Footer = styled.div`
   display: flex;
   align-items: center;
   & img {
-    margin: 0 20px 0 0;
+    margin: 0 10px 0 10px;
     width: 30px;
     height: 30px;
     border-radius: 30px;
@@ -47,10 +62,17 @@ class LocalAttractions extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div ref={this.AttractionsPagePageRef}>
         <Wrapper>
-          <Header ref={this.AttractionsPagePageRef}>Local Attractions</Header>
-          <div></div>
+          <Content>
+            <div>
+              <h1>Local Attractions</h1>
+              Whether you’re a theater enthusiast, enjoy epic shopping, or love
+              to stroll and people watch, London’s West End has an endless
+              opportunity to partake. The heart of London’s "Theatreland"
+              offering the best in drama, comedy, and musical productions.
+            </div>
+          </Content>
         </Wrapper>
         <Footer>
           <SocialCenter>
