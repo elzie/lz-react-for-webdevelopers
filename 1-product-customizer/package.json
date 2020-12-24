@@ -10,7 +10,7 @@
     "axios": "^0.17.1",
     "babel-standalone": "^6.26.0",
     "create-react-class": "^15.6.2",
-    "date-and-time": "^0.6.1",
+    "date-and-time": "^0.14.2",
     "react": "^16.2.0",
     "react-aria-menubutton": "^5.1.0",
     "react-dom": "^16.2.0",
